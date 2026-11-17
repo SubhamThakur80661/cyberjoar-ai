@@ -32,6 +32,18 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
 
+  /* Glassmorphism tokens: frosted surfaces over the ink/paper base.
+     Fills stay translucent so the backdrop blur reads; --glass-bg-strong
+     is for surfaces over busy content (the map) where text must stay readable. */
+  --glass-bg: rgba(18, 21, 15, 0.55);
+  --glass-bg-strong: rgba(16, 19, 12, 0.8);
+  --glass-bg-light: rgba(242, 240, 230, 0.86);
+  --glass-border: rgba(242, 240, 230, 0.14);
+  --glass-border-light: rgba(255, 255, 255, 0.55);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-blur: blur(16px) saturate(1.4);
+  --glass-blur-strong: blur(20px) saturate(1.5);
+
   --font-display: 'Archivo', 'Inter', -apple-system, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -195,6 +207,30 @@ body.has-cursor .cursor-ring {
   will-change: transform;
 }
 
+/* Glass surfaces: shared frosted-panel utilities. Static styling only —
+   no motion, so prefers-reduced-motion handling is unaffected. */
+
+.glass-surface {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-surface--strong {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  backdrop-filter: var(--glass-blur-strong);
+}
+
+.glass-surface--light {
+  background: var(--glass-bg-light);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  border: 1px solid var(--glass-border-light);
+}
+
 /* Top command bar (replaces the old left sidebar) */
 
 #sidebar {
@@ -204,9 +240,11 @@ body.has-cursor .cursor-ring {
   right: 0;
   height: var(--topbar-height);
   z-index: 1000;
-  background: rgba(10, 12, 8, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(10, 12, 8, 0.55);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 .topbar-inner {
@@ -342,7 +380,10 @@ body.has-cursor .cursor-ring {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  border: 1px solid var(--border);
+  background: rgba(242, 240, 230, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 7px 13px;
   white-space: nowrap;
@@ -377,8 +418,11 @@ body.has-cursor .cursor-ring {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #0d100b;
-  border-top: 1px solid var(--border);
+  background: rgba(13, 16, 11, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border-top: 1px solid var(--glass-border);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.35);
   padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
 }
 
@@ -411,10 +455,13 @@ body.has-cursor .cursor-ring {
 /* Cards */
 
 .glass-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 24px;
+  box-shadow: var(--glass-shadow);
   transition: border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
 }
 
@@ -511,8 +558,10 @@ body.has-cursor .cursor-ring {
 }
 
 .toast {
-  background: var(--bg-raised);
-  border: 1px solid var(--border-strong);
+  background: rgba(26, 31, 22, 0.72);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 12px 16px;
   color: var(--text-primary);
@@ -610,10 +659,13 @@ body.has-cursor .cursor-ring {
 }
 
 .stat-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 20px;
+  box-shadow: var(--glass-shadow);
   transition: border-color var(--t-base), transform var(--t-base);
 }
 
@@ -649,7 +701,9 @@ body.has-cursor .cursor-ring {
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  backdrop-filter: blur(8px) saturate(1.2);
   z-index: 9000;
   display: flex;
   align-items: center;
@@ -658,8 +712,10 @@ body.has-cursor .cursor-ring {
 }
 
 .modal-content {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-strong);
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 28px;
   max-width: 700px;

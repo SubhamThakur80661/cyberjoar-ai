@@ -111,10 +111,13 @@
 }
 
 .candidate-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 22px;
+  box-shadow: var(--glass-shadow);
   transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
   position: relative;
   overflow: hidden;
@@ -312,10 +315,13 @@
 }
 
 .weights-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 22px;
+  box-shadow: var(--glass-shadow);
 }
 
 .weights-title {
@@ -411,11 +417,14 @@
 }
 
 .chart-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 22px;
   min-width: 0;
+  box-shadow: var(--glass-shadow);
 }
 
 .chart-card--table {
@@ -520,10 +529,13 @@
 }
 
 .turnout-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 22px;
+  box-shadow: var(--glass-shadow);
 }
 
 .turnout-scenarios {
@@ -534,8 +546,10 @@
 }
 
 .turnout-scenario {
-  background: var(--bg-input);
-  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 18px;
   text-align: center;
@@ -580,8 +594,10 @@
 }
 
 .turnout-result-card {
-  background: var(--bg-input);
-  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 16px;
   text-align: center;
@@ -616,10 +632,13 @@
 }
 
 .logic-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 22px;
+  box-shadow: var(--glass-shadow);
 }
 
 .logic-code {
@@ -825,4 +844,23 @@
   .electoral-page {
     padding: 40px 20px 40px;
   }
+}
+
+/* Glass fallback: where backdrop-filter is unsupported, restore near-opaque
+   fills so text stays readable (this file is imported last, so these win). */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #sidebar { background: rgba(10, 12, 8, 0.94); }
+  .mobile-nav { background: #0d100b; }
+  .glass-card, .stat-card, .candidate-card, .chart-card, .weights-card,
+  .turnout-card, .logic-card { background: var(--bg-surface); }
+  .toast { background: var(--bg-raised); }
+  .modal-content { background: var(--bg-surface); }
+  .intel-topbar { background: #10130c; }
+  .source-filter-btn { background: rgba(242, 240, 230, 0.08); }
+  .ingestion-panel, .ingestion-panel-toggle { background: rgba(16, 19, 12, 0.97); }
+  .map-legend, .map-stat { background: rgba(16, 19, 12, 0.94); }
+  .leaflet-popup-content-wrapper { background: #fff !important; }
+  .leaflet-popup-tip { background: #fff !important; }
+  .leaflet-control-zoom a { background: #10130c !important; }
+  .leaflet-control-attribution { background: rgba(16, 19, 12, 0.85) !important; }
 }
