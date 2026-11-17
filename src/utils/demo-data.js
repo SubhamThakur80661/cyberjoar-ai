@@ -1,6 +1,4 @@
-/* ===== Demo Data Generator ===== */
-
-// Intelligence data points across India
+// Demo data — intelligence reports across India, plus two constituencies.
 export const osintData = [
   {
     id: 'OSN-001', type: 'OSINT', source: 'MongoDB Cluster',
@@ -147,7 +145,6 @@ export function getAllIntelData() {
   return [...osintData, ...humintData, ...imintData];
 }
 
-// Electoral Demo Data — Lucknow constituency
 export const constituencies = [
   {
     id: 'lucknow',
@@ -160,7 +157,7 @@ export const constituencies = [
       {
         id: 'c1', name: 'Rajesh Sharma', party: 'Bharatiya Janata Party',
         partyShort: 'BJP', type: 'incumbent',
-        avatar: '🏛️', color: '#f59e0b',
+        avatar: 'RS', color: '#f59e0b',
         scores: {
           incumbency: 82, partyStrength: 88, pastWork: 75,
           personalBase: 70, casteReligion: 72, sentiment: 68
@@ -170,7 +167,7 @@ export const constituencies = [
       {
         id: 'c2', name: 'Priya Verma', party: 'Indian National Congress',
         partyShort: 'INC', type: 'challenger',
-        avatar: '✊', color: '#3b82f6',
+        avatar: 'PV', color: '#3b82f6',
         scores: {
           incumbency: 30, partyStrength: 55, pastWork: 60,
           personalBase: 65, casteReligion: 58, sentiment: 74
@@ -180,7 +177,7 @@ export const constituencies = [
       {
         id: 'c3', name: 'Akhilesh Yadav Jr.', party: 'Samajwadi Party',
         partyShort: 'SP', type: 'challenger',
-        avatar: '🚲', color: '#ef4444',
+        avatar: 'AY', color: '#ef4444',
         scores: {
           incumbency: 20, partyStrength: 62, pastWork: 45,
           personalBase: 78, casteReligion: 85, sentiment: 58
@@ -190,7 +187,7 @@ export const constituencies = [
       {
         id: 'c4', name: 'Dr. Meera Singh', party: 'Independent',
         partyShort: 'IND', type: 'independent',
-        avatar: '⚖️', color: '#8b5cf6',
+        avatar: 'MS', color: '#8b5cf6',
         scores: {
           incumbency: 10, partyStrength: 15, pastWork: 80,
           personalBase: 55, casteReligion: 30, sentiment: 82
@@ -210,7 +207,7 @@ export const constituencies = [
       {
         id: 'v1', name: 'Vikram Singh', party: 'Bharatiya Janata Party',
         partyShort: 'BJP', type: 'incumbent',
-        avatar: '🏛️', color: '#f59e0b',
+        avatar: 'VS', color: '#f59e0b',
         scores: {
           incumbency: 90, partyStrength: 92, pastWork: 80,
           personalBase: 85, casteReligion: 75, sentiment: 72
@@ -220,7 +217,7 @@ export const constituencies = [
       {
         id: 'v2', name: 'Sunita Devi', party: 'Indian National Congress',
         partyShort: 'INC', type: 'challenger',
-        avatar: '✊', color: '#3b82f6',
+        avatar: 'SD', color: '#3b82f6',
         scores: {
           incumbency: 25, partyStrength: 48, pastWork: 55,
           personalBase: 50, casteReligion: 52, sentiment: 65
@@ -230,7 +227,7 @@ export const constituencies = [
       {
         id: 'v3', name: 'Ram Prasad', party: 'Bahujan Samaj Party',
         partyShort: 'BSP', type: 'challenger',
-        avatar: '🐘', color: '#06d6a0',
+        avatar: 'RP', color: '#06d6a0',
         scores: {
           incumbency: 15, partyStrength: 35, pastWork: 40,
           personalBase: 60, casteReligion: 90, sentiment: 45
@@ -242,10 +239,10 @@ export const constituencies = [
 ];
 
 export const defaultWeights = {
-  incumbency: { label: 'Incumbency Effect', value: 15, icon: '🏛️' },
-  partyStrength: { label: 'Party Strength', value: 25, icon: '🏴' },
-  pastWork: { label: 'Past Work / OSINT Record', value: 20, icon: '📋' },
-  personalBase: { label: 'Personal Base', value: 15, icon: '👥' },
-  casteReligion: { label: 'Caste/Religious Base', value: 15, icon: '🕉️' },
-  sentiment: { label: 'Digital Sentiment', value: 10, icon: '📱' }
+  incumbency: { label: 'Incumbency Effect', value: 15 },
+  partyStrength: { label: 'Party Strength', value: 25 },
+  pastWork: { label: 'Past Work / OSINT Record', value: 20 },
+  personalBase: { label: 'Personal Base', value: 15 },
+  casteReligion: { label: 'Caste/Religious Base', value: 15 },
+  sentiment: { label: 'Digital Sentiment', value: 10 }
 };

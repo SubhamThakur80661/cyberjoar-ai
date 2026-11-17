@@ -1,9 +1,6 @@
-/* ===== Data Parser Utility ===== */
+// Turn an uploaded file into map points.
 import Papa from 'papaparse';
 
-/**
- * Parse CSV file and extract intel data points
- */
 export function parseCSV(file) {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
@@ -31,9 +28,6 @@ export function parseCSV(file) {
   });
 }
 
-/**
- * Parse JSON file and extract intel data points
- */
 export function parseJSON(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -66,9 +60,6 @@ export function parseJSON(file) {
   });
 }
 
-/**
- * Parse uploaded image and create IMINT data point
- */
 export function parseImage(file) {
   return new Promise((resolve) => {
     const reader = new FileReader();
@@ -78,8 +69,9 @@ export function parseImage(file) {
         type: 'IMINT',
         source: `Upload: ${file.name}`,
         title: `Uploaded image — ${file.name}`,
-        lat: 20 + Math.random() * 15, // Random India lat
-        lng: 72 + Math.random() * 12, // Random India lng
+        // Images carry no coordinates here, so place them somewhere in India.
+        lat: 20 + Math.random() * 15,
+        lng: 72 + Math.random() * 12,
         timestamp: new Date().toISOString(),
         classification: 'UNCLASSIFIED',
         confidence: 70,
@@ -97,9 +89,6 @@ export function parseImage(file) {
   });
 }
 
-/**
- * Detect file type and parse accordingly
- */
 export async function parseFile(file) {
   const ext = file.name.split('.').pop().toLowerCase();
   

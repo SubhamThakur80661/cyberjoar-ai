@@ -1,150 +1,90 @@
-# 🛡️ CYBERJOAR AI — Strategic Intelligence & Analytics Platform
+# Cyberjoar AI — Intelligence Map & Electoral Analytics
 
-> **Assignment Submission** — OC.41335.2026.59218  
-> Multi-Source Intelligence Fusion Dashboard & Predictive Electoral Analytics Matrix
+Assignment submission — OC.41335.2026.59218
 
----
+Two dashboards in one app:
 
-## 🎯 Problem Statements Addressed
+- **Intelligence map (PS1).** Reports from open sources, field teams and imagery, plotted on a Leaflet map. Click a marker to read the full report, filter by source, or drop in your own CSV, JSON or images to add to the map.
+- **Electoral analytics (PS5).** Candidates in a constituency, scored across six factors. Move the weights or pick a turnout scenario and the win probabilities update.
 
-### PS1: Intelligence & Data Fusion Dashboard
-A geospatial intelligence fusion platform that ingests data from multiple sources (OSINT, HUMINT, IMINT), plots them as interactive markers on a terrain map, and provides hover-and-view functionality for instant visual confirmation.
+Everything runs on demo data. No backend, no API keys.
 
-**Key Features:**
-- 🗺️ Interactive Leaflet.js map with dark terrain tiles
-- 📡 Multi-source data ingestion (MongoDB, S3, REST API simulation)
-- 📁 Drag-and-drop file upload (CSV, JSON, Images)
-- 🟢🔵🔴 Color-coded markers per intelligence type
-- 🔍 Hover popups with metadata, confidence scores, and imagery
-- ⚡ Real-time layer toggle filters (OSINT/HUMINT/IMINT)
-- 🔄 Pulsing animation for active data points
-
-### PS5: Electoral Analytics Matrix
-A predictive political strategy matrix that compares candidates across multiple weighted factors with real-time Probability of Win (PoW) forecasting and turnout scenario simulation.
-
-**Key Features:**
-- 👤 Interactive candidate profile cards with score bars
-- ⚖️ Configurable weight sliders for 6 scoring factors
-- 📊 Radar chart for multi-factor comparison
-- 📉 Bar chart for factor-by-factor breakdown
-- 🎯 PoW donut chart with normalized probabilities
-- 📋 Detailed comparison matrix table
-- 🗳️ Turnout scenario simulator (Low/Medium/High)
-- 🧠 Transparent algorithm logic documentation
-
----
-
-## 🏗️ Tech Stack
-
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| Build Tool | Vite | Fast HMR, instant dev server |
-| Maps | Leaflet.js + CARTO Tiles | Interactive geospatial visualization |
-| Charts | Chart.js | Radar, Bar, Doughnut charts |
-| File Parsing | PapaParse | CSV/JSON data ingestion |
-| Styling | Vanilla CSS | Glassmorphism dark mode design system |
-| Typography | Inter + JetBrains Mono | Premium UI fonts |
-| Language | Vanilla JavaScript (ES Modules) | Zero framework overhead |
-
----
-
-## 🚀 Quick Start
+## Run it
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+npm run dev      # local dev server
+npm run build    # production build
+npm run preview  # preview the build
 ```
 
----
-
-## 📐 Project Structure
+## How it's put together
 
 ```
 cyberjoar-ai/
-├── index.html                          # Entry HTML
+├── index.html
 ├── package.json
 ├── src/
-│   ├── main.js                         # Router & app bootstrap
-│   ├── styles/
-│   │   ├── globals.css                 # Design system tokens & base styles
-│   │   ├── ps1-dashboard.css           # Intelligence dashboard styles
-│   │   └── ps5-electoral.css           # Electoral analytics styles
-│   ├── pages/
-│   │   ├── home.js                     # Landing / Command Center
-│   │   ├── intelligence-dashboard.js   # PS1 module
-│   │   └── electoral-analytics.js      # PS5 module
+│   ├── main.js                    # router, toasts, app bootstrap
 │   ├── components/
-│   │   └── sidebar.js                  # Navigation sidebar
+│   │   ├── sidebar.js             # navigation sidebar
+│   │   └── icons.js               # inline SVG icons
+│   ├── pages/
+│   │   ├── home.js                # landing page
+│   │   ├── intelligence-dashboard.js   # PS1 — map dashboard
+│   │   └── electoral-analytics.js      # PS5 — electoral dashboard
+│   ├── styles/
+│   │   ├── globals.css            # tokens, sidebar, buttons, toasts
+│   │   ├── home.css               # landing page
+│   │   ├── ps1-dashboard.css      # map dashboard
+│   │   └── ps5-electoral.css      # electoral dashboard
 │   └── utils/
-│       ├── demo-data.js                # Realistic demo datasets
-│       ├── data-parser.js              # CSV/JSON/Image parsing
-│       └── scoring-engine.js           # PoW calculation engine
+│       ├── demo-data.js           # demo reports and constituencies
+│       ├── data-parser.js         # CSV / JSON / image upload parsing
+│       └── scoring-engine.js      # win-probability calculation
 └── public/
     └── favicon.svg
 ```
 
----
+## The map
 
-## 🧮 Algorithms & Logic
+Leaflet with OpenStreetMap standard tiles — no API key needed. (CARTO tiles used to be the basemap; they now need an API key and show a watermark, so they were swapped out. Don't put them back.)
 
-### PS1: Intelligence Marker Classification
+Markers are coloured by source: OSINT green, HUMINT blue, IMINT red. Uploaded files without coordinates get placed somewhere in India so they still show up.
+
+## The win-probability model
+
 ```
-MarkerType = f(source):
-  if source ∈ {MongoDB, S3, API}   → OSINT (🟢 Green)
-  if source ∈ {CSV, JSON, Excel}   → HUMINT (🔵 Blue)
-  if source ∈ {JPG, JPEG, PNG}     → IMINT (🔴 Red)
-```
+score = Σ(weight × factor score) / Σ(weight × 100) × 100
 
-### PS5: Probability of Win (PoW) Model
-```
-PoW(candidate) = Σ(weight_i × score_i) / Σ(weight_i × max_score_i) × 100
+Low turnout:  incumbent +5, everyone else -2
+High turnout: incumbent -3, everyone else +4
 
-Factors = [Incumbency, PartyStrength, PastWork, PersonalBase, CasteReligion, Sentiment]
-
-Turnout Adjustment:
-  Low Turnout  → Incumbent +5%, Challenger -2%
-  High Turnout → Incumbent -3%, Challenger +4%
-
-Final PoW is normalized across all candidates to sum to ~100%
+Win probability = adjusted score / total of all adjusted scores × 100
 ```
 
----
+Factors: incumbency, party strength, past work, personal base, caste/religious base, digital sentiment. Weights are normalised, so they don't need to add up to 100.
 
-## 📊 Demo Data
+## Demo data
 
-The platform comes pre-loaded with realistic demo data:
-- **6 OSINT data points** across major Indian cities (Lucknow, Delhi, Mumbai, Bangalore, Chennai, Hyderabad)
-- **4 HUMINT field reports** (Jaipur, Kolkata, Pune, Ahmedabad)
-- **3 IMINT satellite/drone captures** (Kashmir, Rajasthan, Visakhapatnam)
-- **2 constituencies** (Lucknow, Varanasi) with **3-4 candidates each**
+- 6 OSINT reports (Lucknow, Delhi, Mumbai, Bangalore, Chennai, Hyderabad)
+- 4 HUMINT field reports (Jaipur, Kolkata, Pune, Ahmedabad)
+- 3 IMINT captures (Kashmir, Rajasthan, Visakhapatnam)
+- 2 constituencies (Lucknow, Varanasi) with 3–4 candidates each
 
----
+## Tech
 
-## 🌐 Deployment
+Vite, Leaflet + OpenStreetMap, Chart.js, PapaParse, vanilla JS and CSS. Fonts: Inter + JetBrains Mono.
 
-### Vercel (Recommended)
+## Deploy
+
 ```bash
 npm run build
 npx vercel --prod
 ```
 
-### Netlify
-```bash
-npm run build
-# Deploy the `dist/` directory
-```
+The live site deploys from `main` on Vercel automatically.
 
----
+## License
 
-## 📝 License
-
-Built for CYBERJOAR AI Assignment — April 2026
+Built for the Cyberjoar AI assignment — April 2026.
