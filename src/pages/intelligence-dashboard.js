@@ -3,6 +3,7 @@ import { osintData, getAllIntelData } from '../utils/demo-data.js';
 import { parseFile } from '../utils/data-parser.js';
 import { showToast } from '../main.js';
 import { icon } from '../components/icons.js';
+import { staggerMarkers, mapSweep } from '../utils/motion.js';
 
 let map = null;
 let markers = [];
@@ -11,10 +12,10 @@ let filters = { OSINT: true, HUMINT: true, IMINT: true };
 let panelCollapsed = false;
 let activeTab = 'osint';
 
-const typeColors = { OSINT: '#06d6a0', HUMINT: '#3b82f6', IMINT: '#ef4444' };
+const typeColors = { OSINT: '#C9F73A', HUMINT: '#7CC7FF', IMINT: '#FF6A4D' };
 
 function getMarkerColor(type) {
-  return typeColors[type] || '#f59e0b';
+  return typeColors[type] || '#FFB224';
 }
 
 function getConfidenceClass(conf) {
@@ -90,6 +91,7 @@ function renderMarkers() {
     });
 
   updateStats();
+  staggerMarkers();
 }
 
 function updateStats() {
@@ -195,7 +197,7 @@ function renderOsintTab(body) {
             <span class="badge badge-osint">Demo</span>
           </div>
           <input class="connect-input" value="${s.value}" readonly aria-label="${s.name} connection string" />
-          <button class="btn btn-primary btn-sm" id="connect-${s.id}">Connect &amp; fetch</button>
+          <button class="btn btn-primary btn-sm" id="connect-${s.id}" data-magnetic>Connect &amp; fetch</button>
         </div>
       `).join('')}
     </div>
@@ -215,7 +217,7 @@ function renderOsintTab(body) {
             id: `OSN-LIVE-${Date.now()}`,
             type: 'OSINT',
             source: source.name === 'REST API' ? 'REST API' : source.name,
-            title: `Live OSINT fetch — ${new Date().toLocaleTimeString()}`,
+            title: `Live OSINT fetch at ${new Date().toLocaleTimeString()}`,
             lat: 18 + Math.random() * 16,
             lng: 72 + Math.random() * 14,
             timestamp: new Date().toISOString(),
@@ -230,7 +232,7 @@ function renderOsintTab(body) {
         }
         btn.textContent = 'Connected';
         btn.classList.add('btn-connected');
-        showToast(`Connected to ${source.label} — new report added`);
+        showToast(`Connected to ${source.label}, new report added`);
       }, 1200);
     });
   });
@@ -299,19 +301,18 @@ export function renderIntelDashboard(container) {
     <div class="intel-dashboard">
       <div class="intel-topbar">
         <div class="intel-topbar-left">
-          <h2>Intelligence map</h2>
-          <span class="badge badge-osint">PS1</span>
-          <span class="intel-topbar-sub">Reports from three sources, plotted across India</span>
+          <div class="intel-kicker">Problem statement 1 · ${allDataPoints.length} reports · India</div>
+          <h2><span class="line-mask"><span class="line-inner">Intel map</span></span></h2>
         </div>
         <div class="intel-topbar-right">
           <div class="source-filter" role="group" aria-label="Filter by source">
-            <button class="source-filter-btn active-osint" data-type="OSINT" id="filter-osint" aria-pressed="true">
+            <button class="source-filter-btn active-osint" data-type="OSINT" id="filter-osint" aria-pressed="true" data-magnetic>
               <span class="dot" style="background:var(--osint-color)"></span> OSINT
             </button>
-            <button class="source-filter-btn active-humint" data-type="HUMINT" id="filter-humint" aria-pressed="true">
+            <button class="source-filter-btn active-humint" data-type="HUMINT" id="filter-humint" aria-pressed="true" data-magnetic>
               <span class="dot" style="background:var(--humint-color)"></span> HUMINT
             </button>
-            <button class="source-filter-btn active-imint" data-type="IMINT" id="filter-imint" aria-pressed="true">
+            <button class="source-filter-btn active-imint" data-type="IMINT" id="filter-imint" aria-pressed="true" data-magnetic>
               <span class="dot" style="background:var(--imint-color)"></span> IMINT
             </button>
           </div>
@@ -325,9 +326,9 @@ export function renderIntelDashboard(container) {
 
         <div class="map-legend">
           <h4>Sources</h4>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--osint-color)"></span> OSINT — open sources</div>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--humint-color)"></span> HUMINT — field reports</div>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--imint-color)"></span> IMINT — imagery</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--osint-color)"></span> OSINT · open sources</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--humint-color)"></span> HUMINT · field reports</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--imint-color)"></span> IMINT · imagery</div>
         </div>
 
         <div class="ingestion-panel" id="ingestion-panel">
@@ -358,14 +359,15 @@ export function renderIntelDashboard(container) {
 
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // OpenStreetMap standard tiles — no API key needed. Do not swap in a
-    // key-gated layer (CARTO now requires one and shows a watermark).
+    // OpenStreetMap standard tiles, no API key needed. Keep this layer:
+    // key-gated basemaps show a watermark here.
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19
     }).addTo(map);
 
     renderMarkers();
+    mapSweep(document.querySelector('.map-wrapper'));
     renderIngestionTabContent('osint');
   }, 100);
 

@@ -1,8 +1,8 @@
-// Demo data — intelligence reports across India, plus two constituencies.
+// Demo data: intelligence reports across India, plus two constituencies.
 export const osintData = [
   {
     id: 'OSN-001', type: 'OSINT', source: 'MongoDB Cluster',
-    title: 'Unusual network traffic detected — Lucknow sector',
+    title: 'Unusual network traffic detected: Lucknow sector',
     lat: 26.8467, lng: 80.9462,
     timestamp: '2026-04-19T14:23:00Z',
     classification: 'RESTRICTED',
@@ -12,7 +12,7 @@ export const osintData = [
   },
   {
     id: 'OSN-002', type: 'OSINT', source: 'S3 Intelligence Feed',
-    title: 'Social media sentiment surge — Delhi NCR',
+    title: 'Social media sentiment surge: Delhi NCR',
     lat: 28.6139, lng: 77.2090,
     timestamp: '2026-04-19T18:45:00Z',
     classification: 'UNCLASSIFIED',
@@ -22,7 +22,7 @@ export const osintData = [
   },
   {
     id: 'OSN-003', type: 'OSINT', source: 'API Gateway',
-    title: 'Financial transaction anomaly — Mumbai',
+    title: 'Financial transaction anomaly: Mumbai',
     lat: 19.0760, lng: 72.8777,
     timestamp: '2026-04-20T02:15:00Z',
     classification: 'CONFIDENTIAL',
@@ -32,7 +32,7 @@ export const osintData = [
   },
   {
     id: 'OSN-004', type: 'OSINT', source: 'MongoDB Cluster',
-    title: 'Infrastructure mapping — Bangalore IT Corridor',
+    title: 'Infrastructure mapping: Bangalore IT Corridor',
     lat: 12.9716, lng: 77.5946,
     timestamp: '2026-04-18T09:30:00Z',
     classification: 'UNCLASSIFIED',
@@ -42,7 +42,7 @@ export const osintData = [
   },
   {
     id: 'OSN-005', type: 'OSINT', source: 'API Gateway',
-    title: 'Maritime vessel tracking — Chennai Port',
+    title: 'Maritime vessel tracking: Chennai Port',
     lat: 13.0827, lng: 80.2707,
     timestamp: '2026-04-19T22:10:00Z',
     classification: 'RESTRICTED',
@@ -52,7 +52,7 @@ export const osintData = [
   },
   {
     id: 'OSN-006', type: 'OSINT', source: 'S3 Intelligence Feed',
-    title: 'Cyber threat intelligence — Hyderabad',
+    title: 'Cyber threat intelligence: Hyderabad',
     lat: 17.3850, lng: 78.4867,
     timestamp: '2026-04-20T04:55:00Z',
     classification: 'SECRET',
@@ -65,7 +65,7 @@ export const osintData = [
 export const humintData = [
   {
     id: 'HUM-001', type: 'HUMINT', source: 'Field Report CSV',
-    title: 'Source meeting — Jaipur, Rajasthan',
+    title: 'Source meeting: Jaipur, Rajasthan',
     lat: 26.9124, lng: 75.7873,
     timestamp: '2026-04-18T11:00:00Z',
     classification: 'SECRET',
@@ -75,7 +75,7 @@ export const humintData = [
   },
   {
     id: 'HUM-002', type: 'HUMINT', source: 'JSON Intel Package',
-    title: 'Asset debrief — Kolkata operations',
+    title: 'Asset debrief: Kolkata operations',
     lat: 22.5726, lng: 88.3639,
     timestamp: '2026-04-19T16:30:00Z',
     classification: 'TOP SECRET',
@@ -85,7 +85,7 @@ export const humintData = [
   },
   {
     id: 'HUM-003', type: 'HUMINT', source: 'Field Report CSV',
-    title: 'Surveillance report — Pune industrial zone',
+    title: 'Surveillance report: Pune industrial zone',
     lat: 18.5204, lng: 73.8567,
     timestamp: '2026-04-20T06:15:00Z',
     classification: 'CONFIDENTIAL',
@@ -95,7 +95,7 @@ export const humintData = [
   },
   {
     id: 'HUM-004', type: 'HUMINT', source: 'Excel Report',
-    title: 'Community intel — Ahmedabad sector',
+    title: 'Community intel: Ahmedabad sector',
     lat: 23.0225, lng: 72.5714,
     timestamp: '2026-04-17T14:45:00Z',
     classification: 'RESTRICTED',
@@ -108,36 +108,36 @@ export const humintData = [
 export const imintData = [
   {
     id: 'IMG-001', type: 'IMINT', source: 'Satellite JPG',
-    title: 'Satellite capture — Border region, Kashmir',
+    title: 'Satellite capture: Border region, Kashmir',
     lat: 34.0837, lng: 74.7973,
     timestamp: '2026-04-19T08:00:00Z',
     classification: 'SECRET',
     confidence: 94,
     details: 'High-resolution satellite imagery shows new construction activity at 2 forward positions along LoC. Estimated 40-60 personnel observed.',
     meta: { resolution: '0.3m', sensor: 'Electro-Optical', coverage: '12 sq km' },
-    imageUrl: 'https://placehold.co/400x250/1a1040/06d6a0?text=SAT+IMG+Kashmir'
+    imageUrl: 'https://placehold.co/400x250/1a1040/C9F73A?text=SAT+IMG+Kashmir'
   },
   {
     id: 'IMG-002', type: 'IMINT', source: 'Drone Imagery',
-    title: 'Aerial survey — Rajasthan border',
+    title: 'Aerial survey: Rajasthan border',
     lat: 25.3176, lng: 71.2167,
     timestamp: '2026-04-20T05:30:00Z',
     classification: 'CONFIDENTIAL',
     confidence: 87,
     details: 'Low-altitude drone imagery reveals vehicle tracks and temporary structures consistent with staging area. Activity estimated within last 72 hours.',
     meta: { resolution: '0.1m', sensor: 'Multi-spectral', coverage: '4 sq km' },
-    imageUrl: 'https://placehold.co/400x250/1a1040/ef4444?text=DRONE+IMG+Rajasthan'
+    imageUrl: 'https://placehold.co/400x250/1a1040/FF6A4D?text=DRONE+IMG+Rajasthan'
   },
   {
     id: 'IMG-003', type: 'IMINT', source: 'Satellite JPG',
-    title: 'Port facility — Visakhapatnam naval base',
+    title: 'Port facility: Visakhapatnam naval base',
     lat: 17.6868, lng: 83.2185,
     timestamp: '2026-04-18T12:00:00Z',
     classification: 'TOP SECRET',
     confidence: 96,
     details: 'Scheduled satellite pass captures 4 naval vessels in port, including 2 submarines. Deployment pattern analysis suggests upcoming naval exercise.',
     meta: { resolution: '0.5m', sensor: 'SAR + EO', coverage: '8 sq km' },
-    imageUrl: 'https://placehold.co/400x250/1a1040/3b82f6?text=SAT+IMG+Naval+Base'
+    imageUrl: 'https://placehold.co/400x250/1a1040/7CC7FF?text=SAT+IMG+Naval+Base'
   }
 ];
 
@@ -157,7 +157,7 @@ export const constituencies = [
       {
         id: 'c1', name: 'Rajesh Sharma', party: 'Bharatiya Janata Party',
         partyShort: 'BJP', type: 'incumbent',
-        avatar: 'RS', color: '#f59e0b',
+        avatar: 'RS', color: '#FFB224',
         scores: {
           incumbency: 82, partyStrength: 88, pastWork: 75,
           personalBase: 70, casteReligion: 72, sentiment: 68
@@ -167,7 +167,7 @@ export const constituencies = [
       {
         id: 'c2', name: 'Priya Verma', party: 'Indian National Congress',
         partyShort: 'INC', type: 'challenger',
-        avatar: 'PV', color: '#3b82f6',
+        avatar: 'PV', color: '#7CC7FF',
         scores: {
           incumbency: 30, partyStrength: 55, pastWork: 60,
           personalBase: 65, casteReligion: 58, sentiment: 74
@@ -177,7 +177,7 @@ export const constituencies = [
       {
         id: 'c3', name: 'Akhilesh Yadav Jr.', party: 'Samajwadi Party',
         partyShort: 'SP', type: 'challenger',
-        avatar: 'AY', color: '#ef4444',
+        avatar: 'AY', color: '#FF6A4D',
         scores: {
           incumbency: 20, partyStrength: 62, pastWork: 45,
           personalBase: 78, casteReligion: 85, sentiment: 58
@@ -187,7 +187,7 @@ export const constituencies = [
       {
         id: 'c4', name: 'Dr. Meera Singh', party: 'Independent',
         partyShort: 'IND', type: 'independent',
-        avatar: 'MS', color: '#8b5cf6',
+        avatar: 'MS', color: '#C9F73A',
         scores: {
           incumbency: 10, partyStrength: 15, pastWork: 80,
           personalBase: 55, casteReligion: 30, sentiment: 82
@@ -207,7 +207,7 @@ export const constituencies = [
       {
         id: 'v1', name: 'Vikram Singh', party: 'Bharatiya Janata Party',
         partyShort: 'BJP', type: 'incumbent',
-        avatar: 'VS', color: '#f59e0b',
+        avatar: 'VS', color: '#FFB224',
         scores: {
           incumbency: 90, partyStrength: 92, pastWork: 80,
           personalBase: 85, casteReligion: 75, sentiment: 72
@@ -217,7 +217,7 @@ export const constituencies = [
       {
         id: 'v2', name: 'Sunita Devi', party: 'Indian National Congress',
         partyShort: 'INC', type: 'challenger',
-        avatar: 'SD', color: '#3b82f6',
+        avatar: 'SD', color: '#7CC7FF',
         scores: {
           incumbency: 25, partyStrength: 48, pastWork: 55,
           personalBase: 50, casteReligion: 52, sentiment: 65
@@ -227,7 +227,7 @@ export const constituencies = [
       {
         id: 'v3', name: 'Ram Prasad', party: 'Bahujan Samaj Party',
         partyShort: 'BSP', type: 'challenger',
-        avatar: 'RP', color: '#06d6a0',
+        avatar: 'RP', color: '#C9F73A',
         scores: {
           incumbency: 15, partyStrength: 35, pastWork: 40,
           personalBase: 60, casteReligion: 90, sentiment: 45

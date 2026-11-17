@@ -129,10 +129,10 @@
   height: 3px;
 }
 
-.candidate-card.candidate-a::before { background: #06d6a0; }
-.candidate-card.candidate-b::before { background: #8b5cf6; }
-.candidate-card.candidate-c::before { background: #f59e0b; }
-.candidate-card.candidate-d::before { background: #ef4444; }
+.candidate-card.candidate-a::before { background: #FFB224; }
+.candidate-card.candidate-b::before { background: #7CC7FF; }
+.candidate-card.candidate-c::before { background: #FF6A4D; }
+.candidate-card.candidate-d::before { background: #C9F73A; }
 
 .candidate-card:hover {
   transform: translateY(-2px);
@@ -182,9 +182,9 @@
   letter-spacing: 0.03em;
 }
 
-.type-incumbent { background: rgba(245, 158, 11, 0.13); color: var(--accent-orange); }
-.type-challenger { background: rgba(59, 130, 246, 0.13); color: var(--accent-blue); }
-.type-independent { background: rgba(139, 92, 246, 0.13); color: var(--accent-purple); }
+.type-incumbent { background: rgba(255, 178, 36, 0.13); color: var(--accent-orange); }
+.type-challenger { background: rgba(124, 199, 255, 0.13); color: var(--accent-blue); }
+.type-independent { background: rgba(201, 247, 58, 0.13); color: var(--accent); }
 
 .candidate-scores {
   display: flex;
@@ -301,9 +301,9 @@
   border-radius: 20px;
 }
 
-.sentiment-positive { background: rgba(16, 185, 129, 0.13); color: var(--accent-green); }
-.sentiment-neutral { background: rgba(148, 163, 184, 0.13); color: var(--text-secondary); }
-.sentiment-negative { background: rgba(239, 68, 68, 0.13); color: var(--accent-red); }
+.sentiment-positive { background: rgba(201, 247, 58, 0.13); color: var(--accent-green); }
+.sentiment-neutral { background: rgba(242, 240, 230, 0.13); color: var(--text-secondary); }
+.sentiment-negative { background: rgba(255, 106, 77, 0.13); color: var(--accent-red); }
 
 /* Weight sliders */
 
@@ -383,8 +383,8 @@
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  border: 2px solid #0b0f17;
-  box-shadow: 0 0 0 1px rgba(6, 214, 160, 0.4);
+  border: 2px solid #0a0c08;
+  box-shadow: 0 0 0 1px rgba(201, 247, 58, 0.4);
   transition: transform var(--t-fast);
 }
 
@@ -398,7 +398,7 @@
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  border: 2px solid #0b0f17;
+  border: 2px solid #0a0c08;
 }
 
 /* Charts */
@@ -470,7 +470,7 @@
 }
 
 .matrix-table tbody tr:hover td {
-  background: rgba(6, 214, 160, 0.03);
+  background: rgba(201, 247, 58, 0.03);
 }
 
 .matrix-table tbody tr:last-child td {
@@ -673,5 +673,156 @@
 
   .constituency-stat {
     text-align: left;
+  }
+}
+
+/* Round 2: poster header, editorial strip, big numerals */
+
+.electoral-page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 64px 32px 48px;
+}
+
+.electoral-header {
+  margin-bottom: 36px;
+}
+
+.electoral-header h1 {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.electoral-header h1 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-stretch: normal;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  color: var(--acid);
+}
+
+.electoral-header p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+.constituency-bar {
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  padding: 22px 0;
+  background: transparent;
+}
+
+.constituency-select {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.constituency-stat-value {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 800;
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+}
+
+.section-heading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.candidate-card {
+  border-top: 3px solid var(--border-strong);
+  overflow: hidden;
+}
+
+.candidate-name {
+  font-family: var(--font-display);
+  font-stretch: 108%;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.pow-value {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 900;
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.weights-title {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-stretch: 108%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.turnout-scenario-pct {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 800;
+}
+
+.turnout-result-pow {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 800;
+}
+
+.turnout-scenario.active {
+  background: var(--acid);
+  border-color: var(--acid);
+}
+
+.turnout-scenario.active .turnout-scenario-label,
+.turnout-scenario.active .turnout-scenario-desc {
+  color: #0a0c08;
+}
+
+.turnout-scenario.active .turnout-scenario-pct {
+  color: #0a0c08;
+}
+
+.weight-slider::-webkit-slider-thumb {
+  background: var(--acid);
+  border-color: #0a0c08;
+}
+
+.weight-slider::-moz-range-thumb {
+  background: var(--acid);
+  border-color: #0a0c08;
+}
+
+@media (max-width: 768px) {
+  .electoral-page {
+    padding: 40px 20px 40px;
   }
 }

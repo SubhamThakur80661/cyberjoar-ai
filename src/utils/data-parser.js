@@ -68,7 +68,7 @@ export function parseImage(file) {
         id: `IMG-UP-${Date.now()}`,
         type: 'IMINT',
         source: `Upload: ${file.name}`,
-        title: `Uploaded image — ${file.name}`,
+        title: `Uploaded image: ${file.name}`,
         // Images carry no coordinates here, so place them somewhere in India.
         lat: 20 + Math.random() * 15,
         lng: 72 + Math.random() * 12,

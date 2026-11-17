@@ -36,7 +36,7 @@ function getTypeClass(type) {
 }
 
 function scoreColor(score) {
-  if (score >= 70) return 'var(--accent-cyan)';
+  if (score >= 70) return 'var(--accent)';
   if (score >= 40) return 'var(--accent-orange)';
   return 'var(--accent-red)';
 }
@@ -53,7 +53,7 @@ function renderCandidateCards() {
     const s = c.sentimentBreakdown;
 
     return `
-      <div class="candidate-card ${getCandidateClass(idx)}">
+      <div class="candidate-card ${getCandidateClass(idx)}" data-tilt data-spotlight>
         <div class="candidate-head">
           <div class="candidate-avatar" style="background:${c.color}26;color:${c.color}">${c.avatar}</div>
           <div>
@@ -143,8 +143,8 @@ function renderMatrixTable() {
   `).join('');
 }
 
-const chartText = '#94a3b8';
-const chartGrid = 'rgba(148,163,184,0.1)';
+const chartText = '#A9B09E';
+const chartGrid = 'rgba(242,240,230,0.08)';
 
 function renderCharts() {
   if (!currentConstituency) return;
@@ -179,7 +179,7 @@ function renderCharts() {
           r: {
             beginAtZero: true,
             max: 100,
-            ticks: { color: '#64748b', backdropColor: 'transparent', font: { size: 10 } },
+            ticks: { color: '#6E7568', backdropColor: 'transparent', font: { size: 10 } },
             grid: { color: chartGrid },
             pointLabels: { color: chartText, font: { size: 11, family: 'Inter' } }
           }
@@ -213,7 +213,7 @@ function renderCharts() {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          y: { beginAtZero: true, max: 100, ticks: { color: '#64748b' }, grid: { color: 'rgba(148,163,184,0.08)' } },
+          y: { beginAtZero: true, max: 100, ticks: { color: '#6E7568' }, grid: { color: 'rgba(242,240,230,0.08)' } },
           x: { ticks: { color: chartText, font: { size: 10 } }, grid: { display: false } }
         },
         plugins: {
@@ -305,11 +305,12 @@ export function renderElectoralAnalytics(container) {
   container.innerHTML = `
     <div class="electoral-page">
       <div class="electoral-header">
-        <h1>Electoral analytics</h1>
-        <p>Pick a constituency, compare its candidates across six factors, and see how the forecast changes when you move the weights or change turnout. All numbers here are demo data.</p>
+        <div class="home-eyebrow" data-rise><span class="home-eyebrow-dot"></span>Problem statement 5 · Demo data</div>
+        <h1><span class="line-mask"><span class="line-inner">Who <em>wins?</em></span></span></h1>
+        <p data-rise>Pick a constituency, compare its candidates across six factors, and see how the forecast changes when you move the weights or change turnout. All numbers here are demo data.</p>
       </div>
 
-      <div class="constituency-bar">
+      <div class="constituency-bar" data-rise>
         <label for="constituency-select">Constituency</label>
         <select class="constituency-select" id="constituency-select">
           ${constituencies.map(c => `<option value="${c.id}">${c.name}, ${c.state}</option>`).join('')}
@@ -330,13 +331,13 @@ export function renderElectoralAnalytics(container) {
         </div>
       </div>
 
-      <div class="candidates-section">
+      <div class="candidates-section" data-rise>
         <div class="section-heading">Candidates</div>
         <div class="candidates-grid" id="candidates-grid"></div>
       </div>
 
       <div class="weights-section">
-        <div class="weights-card">
+        <div class="weights-card" data-spotlight>
           <div class="weights-title">What matters most</div>
           <div class="weights-subtitle">Drag a slider and every chart and forecast updates. Weights are normalised automatically, so they don't need to add up to 100.</div>
           <div class="weights-grid" id="weights-grid"></div>
@@ -344,12 +345,12 @@ export function renderElectoralAnalytics(container) {
       </div>
 
       <div class="charts-section">
-        <div class="chart-card">
+        <div class="chart-card" data-tilt data-spotlight>
           <div class="chart-title">Side by side</div>
           <div class="chart-subtitle">Each candidate's shape across all six factors</div>
           <div class="chart-container"><canvas id="radar-chart"></canvas></div>
         </div>
-        <div class="chart-card">
+        <div class="chart-card" data-tilt data-spotlight>
           <div class="chart-title">Factor by factor</div>
           <div class="chart-subtitle">Who leads on each scoring dimension</div>
           <div class="chart-container"><canvas id="bar-chart"></canvas></div>
@@ -357,13 +358,13 @@ export function renderElectoralAnalytics(container) {
       </div>
 
       <div class="charts-section">
-        <div class="chart-card">
+        <div class="chart-card" data-tilt data-spotlight>
           <div class="chart-title">Who's ahead</div>
           <div class="chart-subtitle">Win probability per candidate, from the weighted scores</div>
           <div class="chart-container"><canvas id="pow-chart"></canvas></div>
         </div>
 
-        <div class="chart-card chart-card--table">
+        <div class="chart-card chart-card--table" data-spotlight>
           <div class="chart-title">The full table</div>
           <div class="chart-subtitle">Every factor score, with the leader on each row marked</div>
           <div class="matrix-table-wrapper">
@@ -382,12 +383,12 @@ export function renderElectoralAnalytics(container) {
       </div>
 
       <div class="turnout-section">
-        <div class="turnout-card">
+        <div class="turnout-card" data-spotlight>
           <div class="weights-title">What if turnout changes?</div>
           <div class="weights-subtitle">Low turnout tends to help incumbents; high turnout tends to help challengers. Pick a scenario to see the shift.</div>
           <div class="turnout-scenarios">
             ${turnoutOptions.map(o => `
-              <div class="turnout-scenario ${turnoutScenario === o.id ? 'active' : ''}" data-scenario="${o.id}" id="scenario-${o.id}" role="button" tabindex="0">
+              <div class="turnout-scenario ${turnoutScenario === o.id ? 'active' : ''}" data-scenario="${o.id}" data-magnetic id="scenario-${o.id}" role="button" tabindex="0">
                 <div class="turnout-scenario-label">${o.label}</div>
                 <div class="turnout-scenario-pct">${o.pct}</div>
                 <div class="turnout-scenario-desc">${o.note}</div>
@@ -399,9 +400,9 @@ export function renderElectoralAnalytics(container) {
       </div>
 
       <div class="logic-section">
-        <div class="logic-card">
+        <div class="logic-card" data-spotlight>
           <div class="weights-title">How the forecast works</div>
-          <div class="weights-subtitle">Nothing hidden — this is the whole model, in three steps.</div>
+          <div class="weights-subtitle">Nothing hidden. This is the whole model, in three steps.</div>
           <div class="logic-code">
             <span class="comment">// 1. Weighted score, per candidate</span><br>
             score = &Sigma;(weight &times; factor score) / &Sigma;(weight &times; 100) &times; 100<br><br>

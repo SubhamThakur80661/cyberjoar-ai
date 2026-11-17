@@ -4,12 +4,13 @@ import './styles/ps1-dashboard.css';
 import './styles/ps5-electoral.css';
 import { renderSidebar } from './components/sidebar.js';
 import { icon } from './components/icons.js';
+import { initCursor, pageEnter } from './utils/motion.js';
 import { renderHome } from './pages/home.js';
 import { renderIntelDashboard } from './pages/intelligence-dashboard.js';
 import { renderElectoralAnalytics } from './pages/electoral-analytics.js';
 
 // Build marker — the deploy check greps the live bundle for this string.
-window.__CYBERJOAR_BUILD__ = 'cyberjoar-redesign-2026-11-17';
+window.__CYBERJOAR_BUILD__ = 'cyberjoar-round2-2026-11-17';
 
 const routes = {
   'home': renderHome,
@@ -34,6 +35,7 @@ export function navigateTo(page) {
 
   if (routes[page]) {
     routes[page](main);
+    requestAnimationFrame(() => pageEnter(main));
   }
 }
 
@@ -57,6 +59,7 @@ export function showToast(message, type = 'success') {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderSidebar();
+  initCursor();
   document.querySelectorAll('.mobile-nav-item').forEach(item => {
     item.addEventListener('click', () => navigateTo(item.dataset.page));
   });
