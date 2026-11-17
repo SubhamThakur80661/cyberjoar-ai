@@ -33,14 +33,16 @@
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
 
   /* Glassmorphism tokens: frosted surfaces over the ink/paper base.
-     Fills stay translucent so the backdrop blur reads; --glass-bg-strong
-     is for surfaces over busy content (the map) where text must stay readable. */
-  --glass-bg: rgba(18, 21, 15, 0.55);
-  --glass-bg-strong: rgba(16, 19, 12, 0.8);
-  --glass-bg-light: rgba(242, 240, 230, 0.86);
-  --glass-border: rgba(242, 240, 230, 0.14);
+     Fills stay LOW-opacity (8-25%) so the backdrop blur actually reads;
+     --glass-bg-strong is the top of that range, for surfaces over busy
+     content (the map) where text must stay readable. Never near-opaque:
+     a 90%+ fill hides the blur entirely and the panel looks solid. */
+  --glass-bg: rgba(18, 21, 15, 0.18);
+  --glass-bg-strong: rgba(16, 19, 12, 0.25);
+  --glass-bg-light: rgba(242, 240, 230, 0.25);
+  --glass-border: rgba(242, 240, 230, 0.2);
   --glass-border-light: rgba(255, 255, 255, 0.55);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
   --glass-blur: blur(16px) saturate(1.4);
   --glass-blur-strong: blur(20px) saturate(1.5);
 
@@ -86,10 +88,17 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  /* Ambient aurora behind the glass: soft acid-lime + sky washes give the
+     frosted panels colour to refract — blur over flat ink reads as nothing.
+     Static gradients only (no animation), so prefers-reduced-motion needs
+     no handling here. */
   background-image:
     linear-gradient(rgba(242, 240, 230, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 240, 230, 0.025) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(90deg, rgba(242, 240, 230, 0.025) 1px, transparent 1px),
+    radial-gradient(880px 620px at 10% -8%, rgba(201, 247, 58, 0.16), transparent 62%),
+    radial-gradient(760px 560px at 96% 12%, rgba(124, 199, 255, 0.13), transparent 60%),
+    radial-gradient(980px 720px at 55% 112%, rgba(201, 247, 58, 0.09), transparent 62%);
+  background-size: 72px 72px, 72px 72px, 100% 100%, 100% 100%, 100% 100%;
 }
 
 ::selection {
@@ -240,7 +249,7 @@ body.has-cursor .cursor-ring {
   right: 0;
   height: var(--topbar-height);
   z-index: 1000;
-  background: rgba(10, 12, 8, 0.55);
+  background: var(--glass-bg);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
   backdrop-filter: blur(18px) saturate(1.5);
   border-bottom: 1px solid var(--glass-border);
@@ -418,7 +427,7 @@ body.has-cursor .cursor-ring {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(13, 16, 11, 0.72);
+  background: rgba(13, 16, 11, 0.22);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
   border-top: 1px solid var(--glass-border);
@@ -558,7 +567,7 @@ body.has-cursor .cursor-ring {
 }
 
 .toast {
-  background: rgba(26, 31, 22, 0.72);
+  background: rgba(26, 31, 22, 0.22);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
